@@ -26,6 +26,19 @@ jobs:
       working-directory: ${{github.workspace}}/build
       run: ctest -C ${{env.BUILD_TYPE}}
 
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: v${{ github.run_number }}
+        release_name: Release ${{ github.run_number }}
+        draft: false
+        prerelease: false
+
+
     - name: Upload Release Artifact
       uses: actions/upload-artifact@v4
       with:
