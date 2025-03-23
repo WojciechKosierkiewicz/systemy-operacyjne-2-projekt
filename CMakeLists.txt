@@ -5,10 +5,6 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(SystemyOperacyjne main.cpp
         Philosopher.cpp
-        Waiter.cpp
-        philosopher.cpp
-        philosopher.h
-        waiter.cpp
-        waiter.h)
+        Philosopher.h)
 
 target_compile_options(SystemyOperacyjne PRIVATE -fmodules-ts)
