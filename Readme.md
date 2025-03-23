@@ -15,6 +15,17 @@ cmake --build . --config Release
 ```
 Potem wystarczy uruchomić plik .exe
 ## Wątki
-Każdy filozof to osobny wątek. Wypisywanie jest zabezpieczone współdzielonym mutexem.
+Każdy filozof to osobny wątek. Wypisywanie jest zabezpieczone współdzielonym mutexem. Pętla działana wątku filozofa jest wykonywana w funkcji run
+```c++
+void Philosopher::Run() {
+    while (true) {
+        think();
+        pickForks();
+        eat();
+        releaseForks();
+    }
+}
+```
+Filozof wiecznie próbuje podnieść widelce i jeść. W momęcie gdy skończy odstawia widelce i zaczyna myśleć, pozwalając innym filozofom na jedzenie.
 ## Sekcje krytyczne
 Sekcje krytyczne to dostęp do widelców. Widelce są mutexami dzięki czemu tylko jeden wątek na raz może zablokować widelce. By zapobiec zakleszczeniu każdy filozof bierze pierwsze widelec o mniejszym numerze a potem drugi widelec o większym numerze. Dzięki czemu nigdy nie dojdzie do sytuacji w której wszyscy filozofowie mają jeden widelec i czekają na drugi. Można to porównać do sytuacji gdy każdy filozof bierze pierwsze wideleć swoją reką dominującą ,ale tylko jeden z nich jest leworęczny. W takiej sytuacji jeden filozof zawszę będzie zmuszony do czekania zanim drugi zakończy jedzenie. By dopilnować by filozof nie czekał w nieskończoność dodałem także kolejke piorytetową bazująca na ostatnim cazsie posiłku.
