@@ -30,4 +30,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: SystemyOperacyjne
-        path: ${{github.workspace}}/build/SystemyOperacyjne.exe
+        path: ${{github.workspace}}/build/Release/SystemyOperacyjne.exe
